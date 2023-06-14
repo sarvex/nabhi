@@ -71,11 +71,11 @@ autocmd("FileType", {
   end,
 })
 
--- reload some chadrc options on-save
+-- reload some user options on-save
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = vim.tbl_map(
     vim.fs.normalize,
-    vim.fn.glob(vim.fn.stdpath "config" .. "/lua/custom/**/*.lua", true, true, true)
+    vim.fn.glob(vim.fn.stdpath "config" .. "/lua/user/**/*.lua", true, true, true)
   ),
   group = vim.api.nvim_create_augroup("ReloadNvChad", {}),
 
@@ -86,7 +86,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
     require("plenary.reload").reload_module "base46"
     require("plenary.reload").reload_module(module)
-    require("plenary.reload").reload_module "custom.chadrc"
+    require("plenary.reload").reload_module "user.user"
 
     config = require("core.utils").load_config()
 

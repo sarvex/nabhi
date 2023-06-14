@@ -67,7 +67,7 @@ local default_plugins = {
       require("core.utils").lazy_load "indent-blankline.nvim"
     end,
     opts = function()
-      return require("plugins.configs.others").blankline
+      return require("configs.others").blankline
     end,
     config = function(_, opts)
       require("core.utils").load_mappings "blankline"
@@ -84,7 +84,7 @@ local default_plugins = {
     cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
     build = ":TSUpdate",
     opts = function()
-      return require "plugins.configs.treesitter"
+      return require "configs.treesitter"
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "syntax")
@@ -112,7 +112,7 @@ local default_plugins = {
       })
     end,
     opts = function()
-      return require("plugins.configs.others").gitsigns
+      return require("configs.others").gitsigns
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "git")
@@ -125,7 +125,7 @@ local default_plugins = {
     "williamboman/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
     opts = function()
-      return require "plugins.configs.mason"
+      return require "configs.mason"
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "mason")
@@ -146,7 +146,7 @@ local default_plugins = {
       require("core.utils").lazy_load "nvim-lspconfig"
     end,
     config = function()
-      require "plugins.configs.lspconfig"
+      require 'configs.lsp'
     end,
   },
 
@@ -161,7 +161,7 @@ local default_plugins = {
         dependencies = "rafamadriz/friendly-snippets",
         opts = { history = true, updateevents = "TextChanged,TextChangedI" },
         config = function(_, opts)
-          require("plugins.configs.others").luasnip(opts)
+          require("configs.others").luasnip(opts)
         end,
       },
 
@@ -191,7 +191,7 @@ local default_plugins = {
       },
     },
     opts = function()
-      return require "plugins.configs.cmp"
+      return require "configs.cmp"
     end,
     config = function(_, opts)
       require("cmp").setup(opts)
@@ -222,7 +222,7 @@ local default_plugins = {
       require("core.utils").load_mappings "nvimtree"
     end,
     opts = function()
-      return require "plugins.configs.nvimtree"
+      return require "configs.nvimtree"
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "nvimtree")
@@ -239,7 +239,7 @@ local default_plugins = {
       require("core.utils").load_mappings "telescope"
     end,
     opts = function()
-      return require "plugins.configs.telescope"
+      return require "configs.telescope"
     end,
     config = function(_, opts)
       dofile(vim.g.base46_cache .. "telescope")
@@ -273,4 +273,4 @@ if #config.plugins > 0 then
   table.insert(default_plugins, { import = config.plugins })
 end
 
-require("lazy").setup(default_plugins, config.lazy_nvim)
+require('lazy').setup(default_plugins, config.lazy)

@@ -2,28 +2,28 @@ local M = {}
 local merge_tb = vim.tbl_deep_extend
 
 M.load_config = function()
-  local config = require "core.default_config"
-  local chadrc_path = vim.api.nvim_get_runtime_file("lua/custom/chadrc.lua", false)[1]
+  local config = require "core.default"
+  local user_path = vim.api.nvim_get_runtime_file("lua/user/user.lua", false)[1]
 
-  if chadrc_path then
-    local chadrc = dofile(chadrc_path)
+  if user_path then
+    local user = dofile(user_path)
 
-    config.mappings = M.remove_disabled_keys(chadrc.mappings, require "core.mappings")
-    config = merge_tb("force", config, chadrc)
+    config.mappings = M.remove_disabled_keys(user.mappings, require "core.mappings")
+    config = merge_tb("force", config, user)
   end
 
   config.mappings.disabled = nil
   return config
 end
 
-M.remove_disabled_keys = function(chadrc_mappings, default_mappings)
-  if not chadrc_mappings then
+M.remove_disabled_keys = function(user_mappings, default_mappings)
+  if not user_mappings then
     return default_mappings
   end
 
   -- store keys in a array with true value to compare
   local keys_to_disable = {}
-  for _, mappings in pairs(chadrc_mappings) do
+  for _, mappings in pairs(user_mappings) do
     for mode, section_keys in pairs(mappings) do
       if not keys_to_disable[mode] then
         keys_to_disable[mode] = {}
