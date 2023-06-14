@@ -12,11 +12,11 @@ M.ui = {
   changed_themes = {},
   theme_toggle = { "onedark", "one_light" },
   theme = "onedark", -- default theme
-  transparency = false,
-  lsp_semantic_tokens = false, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
+  transparency = true,
+  lsp_semantic_tokens = true, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 
   -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
-  extended_integrations = {}, -- these aren't compiled by default, ex: "alpha", "notify"
+  extended_integrations = {alpha, bufferline, dap, notify}, -- these aren't compiled by default, ex: "alpha", "notify"
 
   -- cmp themeing
   cmp = {
@@ -83,7 +83,7 @@ M.ui = {
   },
 }
 
-M.plugins = "" -- path i.e "custom.plugins", so make custom/plugins.lua file
+M.plugins = "user.plugins" -- path i.e "custom.plugins", so make custom/plugins.lua file
 
 M.lazy = require 'configs.lazy' -- config for lazy.nvim startup options
 
